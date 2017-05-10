@@ -1,9 +1,9 @@
-= Knowledge =
+# Knowledge
 
-== du ==
+## du
 * exclude http://www.golinuxhub.com/2014/09/how-to-exclude-multiple-directories.html
 
-== rsync ==
+## rsync
 * https://linux.die.net/man/1/rsync
 * exclude pattern: https://askubuntu.com/questions/320458/how-to-exclude-multiple-directories-with-rsync
 ```bash
