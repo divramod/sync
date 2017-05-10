@@ -6,6 +6,7 @@ CURRENT_WORKING_DIR=$PWD
 # snycGit
 function syncGit() {
   DIR=$1
+  echo $2
   cd $DIR
   if [[ -d ".git" ]]; then
     echo &&
