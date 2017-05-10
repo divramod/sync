@@ -20,34 +20,35 @@ function syncGit() {
         GIT_MODIFIED=$(git ls-files --modified --exclude-standard) &&
         GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
         rm -f /tmp/commit_msg.txt &&
-        touch /tmp/commit_msg.txt &&
-        if [ $COMMIT_MESSAGE_EXISTENT == 1 ]; then
-          echo $COMMIT_MESSAGE >> /tmp/commit_msg.txt
-        fi
-        echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
-          echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
-          echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
-          echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt
-        git add -A &&
-          git commit -F /tmp/commit_msg.txt &&
-          rm /tmp/commit_msg.txt
+        touch /tmp/commit_msg.txt
+      if [ $COMMIT_MESSAGE_EXISTENT == 1 ]; then
+        echo $COMMIT_MESSAGE >> /tmp/commit_msg.txt
       fi
-      git pull &&
-        git push -u origin HEAD
+      echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
+        echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
+        echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
+        echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt
+      git add -A &&
+        git commit -F /tmp/commit_msg.txt &&
+        rm /tmp/commit_msg.txt
     fi
-  }
+    git pull &&
+      git push -u origin HEAD
+  fi
+}
 
-  # [RUN]
-  eval SEARCH_PATH=$1
-  DIRS=$(find $SEARCH_PATH -maxdepth 1 ! -path $SEARCH_PATH -type d)
-  echo $SEARCH_PATH
-  if [ -d "$SEARCH_PATH/.git" ]; then
-    if [ -n "$2" ]; then
-      syncGit $SEARCH_PATH "$2"
-    else
-      syncGit $SEARCH_PATH
-    fi
+# [RUN]
+eval SEARCH_PATH=$1
+DIRS=$(find $SEARCH_PATH -maxdepth 1 ! -path $SEARCH_PATH -type d)
+echo $SEARCH_PATH
+if [ -d "$SEARCH_PATH/.git" ]; then
+  if [ -n "$2" ]; then
+    syncGit $SEARCH_PATH "$2"
   else
+    syncGit $SEARCH_PATH
+  fi
+else
+  if [ -d "$SEARCH_PATH" ]; then
     for D in $DIRS
     do
       if [ -n "$2" ]; then
@@ -56,7 +57,10 @@ function syncGit() {
         syncGit $D
       fi
     done
+  else
+    echo "DIRECTORY $SEARCH_PATH not existent!"
   fi
+fi
 
-  # [END]
-  cd $CURRENT_WORKING_DIR
+# [END]
+cd $CURRENT_WORKING_DIR

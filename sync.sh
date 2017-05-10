@@ -17,12 +17,14 @@ while getopts "$optspec" optchar; do
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
           bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde"
+          bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde"
           ;;
         makerspace=*)
           val=${OPTARG#*=}
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
           bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
+          bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
           ;;
         sync)
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
