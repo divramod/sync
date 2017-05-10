@@ -4,11 +4,10 @@ CURRENT_WORKING_DIR=$PWD
 # snycGit
 function syncGit() {
   DIR=$1
-  echo "SYNCING $DIR"
   cd $DIR
   if [[ -d ".git" ]]; then
     echo &&
-      echo $PWD &&
+      echo "SYNCING $PWD" &&
       echo "=======================================================================" &&
       git pull &&
       git pu "automatic sync at $(date +%Y%m%d_%H%M%S)"
