@@ -21,6 +21,7 @@ function syncGit() {
       echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt &&
       git add -A &&
       git commit -F /tmp/commit_msg.txt &&
+      rm /tmp/commit_msg.txt &&
       git pull &&
       git push -u origin HEAD
   fi
