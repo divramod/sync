@@ -11,7 +11,8 @@ function syncGit() {
     touch /tmp/commit_msg.txt
   if [ -n "$2" ]; then
     echo "inin"
-    echo "$2" >> /tmp/commit_msg.txt
+    echo $2 >> /tmp/commit_msg.txt
+    cat /tmp/commit_msg.txt
   fi
   cd $DIR
   if [[ -d ".git" ]]; then
