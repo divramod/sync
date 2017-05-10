@@ -6,6 +6,7 @@ CURRENT_WORKING_DIR=$PWD
 # snycGit
 function syncGit() {
   DIR=$1
+    COMMIT_MESSAGE_EXISTENT=0
   if [ -n "$2" ]; then
     COMMIT_MESSAGE=$2
     COMMIT_MESSAGE_EXISTENT=1
