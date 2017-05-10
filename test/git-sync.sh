@@ -9,8 +9,11 @@ function syncGit() {
     echo &&
       echo "SYNCING $PWD" &&
       echo "=======================================================================" &&
+      git add -A &&
+      echo "1"
+      git commit -m "automatic sync at $(date +%Y%m%d_%H%M%S)" &&
       git pull &&
-      git pu "automatic sync at $(date +%Y%m%d_%H%M%S)"
+      git push -u origin HEAD
   fi
 }
 
