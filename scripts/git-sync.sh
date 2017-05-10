@@ -11,7 +11,6 @@ function syncGit() {
     COMMIT_MESSAGE_EXISTENT=1
   fi
   cd $DIR
-  echo $DIR
   if [[ -d "$DIR/.git" ]]; then
     echo &&
       echo "SYNCING $PWD" &&
@@ -48,6 +47,15 @@ function syncGit() {
     else
       syncGit $SEARCH_PATH
     fi
+  else
+    for D in $DIRS
+    do
+      if [ -n "$2" ]; then
+        syncGit $D "$2"
+      else
+        syncGit $D
+      fi
+    done
   fi
 
   # [END]
