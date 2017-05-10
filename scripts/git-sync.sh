@@ -2,6 +2,7 @@
 
 # [START]
 CURRENT_WORKING_DIR=$PWD
+echo "in"
 
 # snycGit
 function syncGit() {
