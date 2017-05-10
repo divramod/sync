@@ -11,8 +11,16 @@ function syncGit() {
     echo &&
       echo "SYNCING $PWD" &&
       echo "=======================================================================" &&
+      GIT_DELETED=$(git ls-files --deleted --exclude-standard) &&
+      GIT_MODIFIED=$(git ls-files --modified --exclude-standard) &&
+      GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
+      touch /tmp/commit_msg.txt &&
+      echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
+      echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
+      echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
+      echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt &&
       git add -A &&
-      git commit -m "automatic sync at $(date +%Y%m%d_%H%M%S)" &&
+      git commit -F /tmp/commit_msg.txt &&
       git pull &&
       git push -u origin HEAD
   fi
