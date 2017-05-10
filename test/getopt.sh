@@ -15,6 +15,10 @@ while [ $# -ge 1 ]; do
                         searchpath="$2"
                         shift
                         ;;
+                -m|--makerspace)
+                        searchpath="$2"
+                        shift
+                        ;;
                 -h)
                         echo "Display some help"
                         exit 0
