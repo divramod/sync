@@ -10,6 +10,7 @@ function syncGit() {
   rm -f /tmp/commit_msg.txt &&
     touch /tmp/commit_msg.txt
   if [ -n "$2" ]; then
+    echo "inin"
     echo "$2" >> /tmp/commit_msg.txt
   fi
   cd $DIR
