@@ -27,7 +27,7 @@ while getopts "$optspec" optchar; do
           val=${OPTARG#*=}
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-          bash $DIR/scripts/git-sync.sh "~/.sync" $val
+          bash $DIR/scripts/git-sync.sh "~/.sync" "$val"
           ;;
         *)
           if [ "$OPTERR" = 1 ] && [ "${optspec:0:1}" != ":" ]; then
