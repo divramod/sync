@@ -49,7 +49,8 @@ if [ -d "$SEARCH_PATH/.git" ]; then
         do
           if [[ ! $D == *".git"* ]]; then
             if [ -n "$2" ]; then
-              syncGit $D $2
+              echo "in"
+              syncGit $D "$2"
             else
               syncGit $D
             fi
