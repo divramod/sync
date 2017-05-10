@@ -7,6 +7,11 @@ CURRENT_WORKING_DIR=$PWD
 function syncGit() {
   DIR=$1
   echo $2
+  rm -f /tmp/commit_msg.txt &&
+    touch /tmp/commit_msg.txt
+  if [ -n "$2" ]; then
+    echo "$2" >> /tmp/commit_msg.txt
+  fi
   cd $DIR
   if [[ -d ".git" ]]; then
     echo &&
@@ -16,12 +21,7 @@ function syncGit() {
       GIT_DELETED=$(git ls-files --deleted --exclude-standard) &&
         GIT_MODIFIED=$(git ls-files --modified --exclude-standard) &&
         GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
-        rm -f /tmp/commit_msg.txt &&
-        touch /tmp/commit_msg.txt
-      if [ -n $2 ]; then
-        echo "$2" >> /tmp/commit_msg.txt
-      fi
-      echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
+        echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
         echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
         echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
         echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt &&
