@@ -7,6 +7,9 @@ CURRENT_WORKING_DIR=$PWD
 function syncGit() {
   DIR=$1
   BLA=$2
+  if [ -n "$2" ]; then
+    echo "yes"
+  fi
   cd $DIR
   if [[ -d ".git" ]]; then
     echo &&
