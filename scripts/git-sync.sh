@@ -23,12 +23,11 @@ function syncGit() {
         touch /tmp/commit_msg.txt &&
         if [ $COMMIT_MESSAGE_EXISTENT == 1 ]; then
           echo $COMMIT_MESSAGE >> /tmp/commit_msg.txt
-        else
-          echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
-            echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
-            echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
-            echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt
         fi
+        echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
+          echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
+          echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
+          echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt
         git add -A &&
           git commit -F /tmp/commit_msg.txt &&
           rm /tmp/commit_msg.txt
