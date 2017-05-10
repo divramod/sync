@@ -24,6 +24,7 @@ function syncGit() {
         GIT_MODIFIED=$(git ls-files --modified --exclude-standard) &&
         GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
         echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
+    cat /tmp/commit_msg.txt
         echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
         echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
         echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt &&
