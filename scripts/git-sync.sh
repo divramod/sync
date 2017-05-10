@@ -47,7 +47,11 @@ function syncGit() {
             for D in $DIRS
             do
               if [[ ! $D == *".git"* ]]; then
-                syncGit $D
+                if [ -n "$2" ]; then
+                  syncGit $D $2
+                else
+                  syncGit $D
+                fi
               fi
             done
             break;;
