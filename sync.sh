@@ -16,13 +16,11 @@ while getopts "$optspec" optchar; do
         makerspace)
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-          echo $DIR
           bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde"
           ;;
         sync)
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-          echo $DIR
           bash $DIR/scripts/git-sync.sh "~/.sync"
           ;;
         *)

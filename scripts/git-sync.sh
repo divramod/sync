@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# [START]
 CURRENT_WORKING_DIR=$PWD
+
 # snycGit
 function syncGit() {
   DIR=$1
@@ -40,4 +42,6 @@ if [ -d "$SEARCH_PATH/.git" ]; then
   done
   syncGit $SEARCH_PATH
 fi
+
+# [END]
 cd $CURRENT_WORKING_DIR
