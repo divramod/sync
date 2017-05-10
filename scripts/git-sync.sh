@@ -53,6 +53,7 @@ function syncGit() {
                 echo "2"
                 syncGit $D "$2"
               else
+                echo "1"
                 syncGit $D
               fi
             fi
