@@ -19,7 +19,7 @@ function syncGit() {
         rm -f /tmp/commit_msg.txt &&
         touch /tmp/commit_msg.txt
       if [ -n "$2" ]; then
-        echo $2 >> /tmp/commit_msg.txt
+        echo "$2" >> /tmp/commit_msg.txt
       fi
       echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
         echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
