@@ -6,9 +6,9 @@ CURRENT_WORKING_DIR=$PWD
 # snycGit
 function syncGit() {
   DIR=$1
-  BLA=$2
   if [ -n "$2" ]; then
-    echo "yes"
+    COMMIT_MESSAGE=$2
+    BLA=1
   fi
   cd $DIR
   if [[ -d ".git" ]]; then
@@ -21,8 +21,8 @@ function syncGit() {
         GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
         rm -f /tmp/commit_msg.txt &&
         touch /tmp/commit_msg.txt &&
-        if [ -n "$BLA" ]; then
-          echo $2 >> /tmp/commit_msg.txt
+        if [ $BLA == 1 ]; then
+          echo $COMMIT_MESSAGE >> /tmp/commit_msg.txt
           echo "yes"
         else
           echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
