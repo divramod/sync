@@ -2,7 +2,6 @@
 
 # [START]
 CURRENT_WORKING_DIR=$PWD
-echo "in"
 
 # snycGit
 function syncGit() {
@@ -12,7 +11,8 @@ function syncGit() {
     COMMIT_MESSAGE_EXISTENT=1
   fi
   cd $DIR
-  if [[ -d ".git" ]]; then
+  echo $DIR
+  if [[ -d "$DIR/.git" ]]; then
     echo &&
       echo "SYNCING $PWD" &&
       echo "======================================================================="
@@ -41,31 +41,13 @@ function syncGit() {
   # [RUN]
   eval SEARCH_PATH=$1
   DIRS=$(find $SEARCH_PATH -maxdepth 1 ! -path $SEARCH_PATH -type d)
+  echo $SEARCH_PATH
   if [ -d "$SEARCH_PATH/.git" ]; then
-    while true; do
-      #echo
-      #echo "You have a top level .git repo in $SEARCH_PATH !"
-      #read -p "Do you wish that i try to sync in the subfolders first? [y|n] " yn
-      yn=y
-      case $yn in
-        [Yy]* )
-          for D in $DIRS
-          do
-            if [[ ! $D == *".git"* ]]; then
-              if [ -n "$2" ]; then
-                syncGit $D "$2"
-              else
-                syncGit $D
-              fi
-            fi
-          done
-          break;;
-        [Nn]* )
-          break;;
-        * ) echo "Please answer yes or no.";;
-      esac
-    done
-    syncGit $SEARCH_PATH
+    if [ -n "$2" ]; then
+      syncGit $SEARCH_PATH "$2"
+    else
+      syncGit $SEARCH_PATH
+    fi
   fi
 
   # [END]
