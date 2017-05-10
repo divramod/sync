@@ -25,6 +25,8 @@ function syncGit() {
         echo "now here"
       cat /tmp/commit_msg.txt
       echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
+        echo "now here after"
+      cat /tmp/commit_msg.txt
         echo ' MODIFIED: '$GIT_MODIFIED >> /tmp/commit_msg.txt &&
         echo ' ADDED: '$GIT_OTHERS >> /tmp/commit_msg.txt &&
         git add -A &&
