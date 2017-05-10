@@ -8,7 +8,7 @@ function syncGit() {
   DIR=$1
   if [ -n "$2" ]; then
     COMMIT_MESSAGE=$2
-    BLA=1
+    COMMIT_MESSAGE_EXISTENT=1
   fi
   cd $DIR
   if [[ -d ".git" ]]; then
@@ -21,9 +21,8 @@ function syncGit() {
         GIT_OTHERS=$(git ls-files --others --exclude-standard) &&
         rm -f /tmp/commit_msg.txt &&
         touch /tmp/commit_msg.txt &&
-        if [ $BLA == 1 ]; then
+        if [ $COMMIT_MESSAGE_EXISTENT == 1 ]; then
           echo $COMMIT_MESSAGE >> /tmp/commit_msg.txt
-          echo "yes"
         else
           echo 'automatic sync at '$(date +%Y.%m.%d)' '$(date +%H:%M:%S)' by '$(git config user.name) >> /tmp/commit_msg.txt &&
             echo ' DELETED: '$GIT_DELETED >> /tmp/commit_msg.txt &&
@@ -54,10 +53,8 @@ function syncGit() {
           do
             if [[ ! $D == *".git"* ]]; then
               if [ -n "$2" ]; then
-                echo "2"
                 syncGit $D "$2"
               else
-                echo "1"
                 syncGit $D
               fi
             fi
