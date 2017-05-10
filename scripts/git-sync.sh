@@ -36,7 +36,6 @@ function syncGit() {
   }
 
   # [RUN]
-  echo $2
   eval SEARCH_PATH=$1
   DIRS=$(find $SEARCH_PATH -maxdepth 1 ! -path $SEARCH_PATH -type d)
   if [ -d "$SEARCH_PATH/.git" ]; then
@@ -51,7 +50,7 @@ function syncGit() {
           do
             if [[ ! $D == *".git"* ]]; then
               if [ -n "$2" ]; then
-                echo "in"
+                echo "2"
                 syncGit $D "$2"
               else
                 syncGit $D
