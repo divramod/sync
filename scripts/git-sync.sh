@@ -41,7 +41,6 @@ function syncGit() {
 # [RUN]
 eval SEARCH_PATH=$1
 DIRS=$(find $SEARCH_PATH -maxdepth 1 ! -path $SEARCH_PATH -type d)
-echo $SEARCH_PATH
 if [ -d "$SEARCH_PATH/.git" ]; then
   if [ -n "$2" ]; then
     syncGit $SEARCH_PATH "$2"
@@ -59,7 +58,9 @@ else
       fi
     done
   else
-    echo "DIRECTORY $SEARCH_PATH not existent!"
+    echo
+    echo "FAILED: DIRECTORY $SEARCH_PATH not existent!"
+    echo "============================================"
   fi
 fi
 
