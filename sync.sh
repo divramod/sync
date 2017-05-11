@@ -1,5 +1,5 @@
 #!/bin/bash
-optspec=":hvm-:"
+optspec=":hvma-:"
 while getopts "$optspec" optchar; do
   case "${optchar}" in
     -)
@@ -60,6 +60,22 @@ while getopts "$optspec" optchar; do
           fi
           ;;
       esac;;
+    a)
+      echo "Parsing option: '-${optchar}'" >&2
+      DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+      if [ -d ~/_me/code/makerspace-eberswalde ]; then
+        bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
+      fi
+      if [ -d ~/code/makerspace-eberswalde ]; then
+        bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
+      fi
+      if [ -d /var/lib/tftpboot ]; then
+        sudo bash $DIR/scripts/git-sync.sh "/var/lib/tftpboot"
+      fi
+      if [ -d ~/.sync ]; then
+        sudo bash $DIR/scripts/git-sync.sh "~/.sync"
+      fi
+      ;;
     h)
       echo "usage: $0 [-v] [--loglevel[=]<value>]" >&2
       exit 2
