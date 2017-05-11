@@ -69,7 +69,27 @@ while getopts "$optspec" optchar; do
       sudo bash $DIR/scripts/git-sync.sh "~/.sync"
       ;;
     h)
-      echo "usage: $0 [-v] [--loglevel[=]<value>]" >&2
+      HELP_TXT="
+=================================================================================
+================================ sync tool help =================================
+=================================================================================
+      
+USAGE: snc [-SHORT] | [--LONG[=]<value>]
+
+  [-a]: sync all
+  [-h]: show help for the sync-tool
+  [-v]: TODO
+
+  [--sync]: synchronize the git repo of the sync-tool itself
+  [--makerspace]: sycn every git repo in the makerspace-eberswalde folder
+  [--loglevel[=]<value>]: TODO
+
+EXAMPLES: 
+  snc -a
+  snc --loglevel
+  snc --loglevel=1
+"
+      echo "$HELP_TXT" >&2
       exit 2
       ;;
     v)

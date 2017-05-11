@@ -60,7 +60,7 @@ else
   else
     echo
     echo "FAILED: DIRECTORY $SEARCH_PATH not existent!"
-    echo "============================================"
+    echo "======================================================================="
   fi
 fi
 
