@@ -14,17 +14,34 @@ while getopts "$optspec" optchar; do
           echo "Parsing option: '--${opt}', value: '${val}'" >&2
           ;;
         makerspace)
+          val=${OPTARG#*=}
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-          bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde"
-          bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde"
+          if [ -d ~/_me/code/makerspace-eberswalde ]; then
+            bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
+          fi
+          if [ -d ~/code/makerspace-eberswalde ]; then
+            bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
+          fi
+          if [ -d /var/lib/tftpboot ]; then
+            sudo bash $DIR/scripts/git-sync.sh "/var/lib/tftpboot"
+          fi
+          if [ -d ~/.sync ]; then
+            sudo bash $DIR/scripts/git-sync.sh "~/.sync"
+          fi
           ;;
         makerspace=*)
           val=${OPTARG#*=}
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-          bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
-          bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
+          if [ -d "~/_me/code/makerspace-eberswalde" ]; then
+            echo "me"
+            #bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
+          fi
+          if [ -d "~/code/makerspace-eberswalde" ]; then
+            echo "code"
+            #bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
+          fi
           ;;
         sync)
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
