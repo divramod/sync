@@ -63,18 +63,10 @@ while getopts "$optspec" optchar; do
     a)
       echo "Parsing option: '-${optchar}'" >&2
       DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-      if [ -d ~/_me/code/makerspace-eberswalde ]; then
-        bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
-      fi
-      if [ -d ~/code/makerspace-eberswalde ]; then
-        bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
-      fi
-      if [ -d /var/lib/tftpboot ]; then
-        sudo bash $DIR/scripts/git-sync.sh "/var/lib/tftpboot"
-      fi
-      if [ -d ~/.sync ]; then
-        sudo bash $DIR/scripts/git-sync.sh "~/.sync"
-      fi
+      bash $DIR/scripts/git-sync.sh "~/_me/code/makerspace-eberswalde" "$val"
+      bash $DIR/scripts/git-sync.sh "~/code/makerspace-eberswalde" "$val"
+      sudo bash $DIR/scripts/git-sync.sh "/var/lib/tftpboot"
+      sudo bash $DIR/scripts/git-sync.sh "~/.sync"
       ;;
     h)
       echo "usage: $0 [-v] [--loglevel[=]<value>]" >&2
