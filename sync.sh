@@ -90,7 +90,6 @@ EXAMPLES:
   snc --loglevel=1
 "
       echo "$HELP_TXT" >&2
-      exit 2
       ;;
     v)
       echo "Parsing option: '-${optchar}'" >&2
