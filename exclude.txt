@@ -3,4 +3,3 @@ bower_components/
 .gradle/
 .meteor/
 .npm/
-

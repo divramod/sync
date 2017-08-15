@@ -1,4 +1,5 @@
 #!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 optspec=":hvmai-:"
 while getopts "$optspec" optchar; do
   case "${optchar}" in
@@ -58,6 +59,13 @@ while getopts "$optspec" optchar; do
           echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
           vim ~/.sync/sync.sh -c ":NERDTreeFind"
           ;;
+        cam)
+          val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+          echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
+          if ! [[ "$val" == "" ]]; then
+            bash $DIR/scripts/cam-sync.sh "$val"
+          fi
+          ;;
         *)
           if [ "$OPTERR" = 1 ] && [ "${optspec:0:1}" != ":" ]; then
             echo "Unknown option --${OPTARG}" >&2
@@ -113,7 +121,7 @@ while getopts "$optspec" optchar; do
       EXAMPLES:
       snc -a
       snc --loglevel
-      snc --loglevel=1
+      snc --loglevel 1
       "
       echo "$HELP_TXT" >&2
       ;;
